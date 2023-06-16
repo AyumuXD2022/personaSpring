@@ -37,13 +37,6 @@ public class Persona {
             message = "Correo invalido")
     private String email;
 
-    ///Eliminar
-    @Column(nullable = false)
-    @NotBlank(message = "No puede ir vacio")
-    @Pattern(regexp = "0{0,2}([\\+]?[\\d]{1,3} ?)?([\\(]([\\d]{2,3})[)] ?)?[0-9][0-9 \\-]{6,}( ?([xX]|([eE]xt[\\.]?)) ?([\\d]{1,5}))?",
-            message = "Telefono invalido")
-    private String telefono;
-
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     @NotNull(message = "No puede ir vacio")
