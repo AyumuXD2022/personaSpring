@@ -49,7 +49,6 @@ public class PersonaController {
 
         personaActual.setNombre(persona.getNombre());
         personaActual.setApellido(persona.getApellido());
-        personaActual.setTelefono(persona.getTelefono());
         personaActual.setEmail(persona.getEmail());
         personaActual.setFechaNacimiento(persona.getFechaNacimiento());
 
