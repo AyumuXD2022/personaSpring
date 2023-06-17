@@ -1,5 +1,6 @@
 package com.anydesk.backend.exception;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,4 +42,14 @@ public class HandlerError {
         errorMap.put("mensaje","Llenas los campos de manera correcta");
         return errorMap;
     }
+
+    ///Error de operaciones
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(DataAccessException.class)
+    public Map<String,Object> handlerErrorDataBase(DataAccessException ex){
+        Map<String,Object> errorMap = new HashMap();
+        errorMap.put("error","Error en hacer una operacion");
+        return errorMap;
+    }
+
 }

@@ -34,7 +34,6 @@ public class PersonaController {
     public ResponseEntity<?> savePersona(@RequestBody @Valid Persona persona){
         Map<String, Object> response = new HashMap<>();
         Persona personaNueva = this.personaService.guardarPersona(persona);
-
         response.put("mensaje","Se ha aguardo");
         response.put("persona",personaNueva);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
@@ -50,6 +49,8 @@ public class PersonaController {
         personaActual.setNombre(persona.getNombre());
         personaActual.setApellido(persona.getApellido());
         personaActual.setEmail(persona.getEmail());
+        personaActual.setTelefono(persona.getTelefono());
+        personaActual.setDireccion(persona.getDireccion());
         personaActual.setFechaNacimiento(persona.getFechaNacimiento());
 
         Persona personaUpdate = this.personaService.guardarPersona(personaActual);

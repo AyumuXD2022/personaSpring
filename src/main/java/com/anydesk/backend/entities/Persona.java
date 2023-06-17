@@ -1,5 +1,6 @@
 package com.anydesk.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank; //Vacio o null
 import jakarta.validation.constraints.NotEmpty;
@@ -31,7 +32,7 @@ public class Persona {
              message = "Apellido invalido")
     private String apellido;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     @NotBlank(message = "No puede ir vacio")
     @Pattern(regexp = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",
             message = "Correo invalido")
@@ -48,6 +49,16 @@ public class Persona {
 
     @Column(name = "update_at")
     private Date updateAt;
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "direccion_id")
+    private Direccion direccion;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "telefono_id")
+    private Telefono telefono;
 
     @PreUpdate
     public void update(){
